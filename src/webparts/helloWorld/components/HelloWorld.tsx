@@ -12,16 +12,11 @@ import "@pnp/sp/items";
 import UserSearch from './UserSearch';
 import UserSearchCombo from './Combobox';
 
-interface ILoginUser{
-  Title:string;
-  Email:string;
-    loginName:string;
-}
 
 const HelloWorld: React.FC<IHelloWorldProps> = (props) => {
   const sp = spfi().using(SPFx(props.context));
 
-  const [apicurrentUser, setApiCurrentUser] = useState<ILoginUser>();
+  const [apicurrentUser, setApiCurrentUser] = useState<any[]>([]);
   const [currentUser, setCurrentUser] = useState<{ Title: string; Email: string } | null>(null);
 
   useEffect(() => {
@@ -30,7 +25,8 @@ const HelloWorld: React.FC<IHelloWorldProps> = (props) => {
       try {
         const user = await sp.web.currentUser.select("Title", "Email")();
         setCurrentUser(user);
-        console.log(currentUser);
+        console.log(user);
+        console.log(apicurrentUser);
       } catch (error) {
         console.error(error);
       }
@@ -53,8 +49,8 @@ const HelloWorld: React.FC<IHelloWorldProps> = (props) => {
           HttpClient.configurations.v1
         );
         const apiUsers = await apiResponse.json();
-        setApiCurrentUser(apiUsers);
-        console.log(apicurrentUser);
+        setApiCurrentUser(apiUsers.users);
+        console.log("apiuser: ", apiUsers.users);
       } catch (error) {
         console.error(error);
       }
@@ -74,8 +70,36 @@ const HelloWorld: React.FC<IHelloWorldProps> = (props) => {
         </div>
       )}
       <UserSearch context={props.context} />
-      <hr/>
+      <hr />
       <UserSearchCombo context={props.context} />
+      <div>
+        Api Result<br />
+        <table style={{ borderCollapse: "collapse", width: "100%" }}>
+          <thead>
+            <tr>
+              <th style={{ border: "1px solid #ccc", padding: "8px" }}>ID</th>
+              <th style={{ border: "1px solid #ccc", padding: "8px" }}>Name</th>
+              <th style={{ border: "1px solid #ccc", padding: "8px" }}>Email</th>
+              <th style={{ border: "1px solid #ccc", padding: "8px" }}>Phone</th>
+              <th style={{ border: "1px solid #ccc", padding: "8px" }}>Company</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              apicurrentUser.map((user) => (
+                <tr key={user.id}>
+                  <td style={{ border: "1px solid #ccc", padding: "8px" }}>{user.id}</td>
+                  <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+                    {user.firstName} {user.lastName}
+                  </td>
+                  <td style={{ border: "1px solid #ccc", padding: "8px" }}>{user.email}</td>
+                  <td style={{ border: "1px solid #ccc", padding: "8px" }}>{user.phone}</td>
+                  <td style={{ border: "1px solid #ccc", padding: "8px" }}>{user.company?.name}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 };

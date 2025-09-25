@@ -10,8 +10,7 @@ import { useEffect, useState } from 'react';
 
 
 
-const PermissionTest:React.FC<IPermissionTestProps>=(props)=>{
-
+const PermissionTest:React.FC<IPermissionTestProps>=(props)=>{ 
   const sp=spfi().using(SPFx(props.context));
   const listTitle = "SPFX Form"; // Change to your list title
   const [permissionText, setPermissionText] = useState<string>('Checking permissions...');

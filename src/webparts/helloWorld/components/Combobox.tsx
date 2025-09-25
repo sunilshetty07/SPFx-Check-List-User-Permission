@@ -54,6 +54,8 @@ const UserSearchCombo: React.FC<{ context: any }> = ({ context }) => {
           <strong>Selected:</strong> {selectedUser.text}
         </div>
       )}
+
+      
     </div>
   );
 };
