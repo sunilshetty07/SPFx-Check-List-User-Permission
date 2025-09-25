@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "permission-webpart-client-side-solution",
+    "id": "73bb7833-b25e-4b8e-b170-6f97aace0dea",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.18.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "permission-webpart description"
+      },
+      "longDescription": {
+        "default": "permission-webpart description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "permission-webpart Feature",
+        "description": "The feature that activates elements of the permission-webpart solution.",
+        "id": "19e4921f-6d71-4140-88d8-be73efc42490",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/permission-webpart.sppkg"
+  }
+}
